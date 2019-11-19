@@ -6,18 +6,20 @@
 using namespace std;
 
 class Carro {
+	//Contador
+	static char id;
 	string marca, modelo;
 	char nome;
 	float energiaMax, energia;
 	int velocidadeMax, velocidade;
 	bool acelerador = false, travao = false, emergencia = false, condutor = false, dano = false;
 public:
-	//construtor com valor de modelo por definição
+	//construtor com valor de modelo por definiï¿½ï¿½o
 	Carro(string marca, float energia, float energiaMax, int velocidadeMax, string modelo = "modelo base");
 
-	//funções get
+	//funï¿½ï¿½es get
 	char getNome()const { return nome; }
-	//funções de controlo do carro
+	//funï¿½ï¿½es de controlo do carro
 	void acelera();
 	void trava();
 	void carrega(float n);
