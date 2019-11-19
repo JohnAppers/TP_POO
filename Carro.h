@@ -19,8 +19,9 @@ public:
 	char getNome()const { return nome; }
 	//funções de controlo do carro
 	void acelera();
-	void para_acelera();
-	void para_trava();
 	void trava();
+	void carrega(float n);
+	void movimento();
+	void setEmergencia();
 };
 #endif

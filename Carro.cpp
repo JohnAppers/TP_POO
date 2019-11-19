@@ -17,19 +17,42 @@ Carro::Carro(string marca_p, float energia_p, float energiaMax_p, int velocidade
 		ascii = 63; 				//se a letra anterior for z, define como '?'
 	}		
 }
+/*---Funções para ativar/desativar o acelerador e o travão---*/
 void Carro::acelera() {
 	if (!travao) {
-		acelerador = true;
+		acelerador = !acelerador;
 	}
-}
-void Carro::para_acelera() {
-	acelerador = false;
 }
 void Carro::trava() {
 	if (!acelerador) {
-		travao = true;
+		travao = !travao;
 	}
 }
-void Carro::para_trava() {
-	travao = false;
+/*---Função de carregamento de energia, fornecendo n por iteração---*/
+void Carro::carrega(float n) {
+	if (energia <= (energiaMax - n)) {
+		energia += n;
+	}
+	else {
+		energia = energiaMax;
+	}
+}
+/*---Função geral de movimento, acelera ou trava e reduz energia conforme velocidade---*/
+void Carro::movimento() {
+	if (acelerador && velocidade < velocidadeMax) {
+		velocidade++;
+	}
+	if (travao && velocidade > 0) {
+		velocidade--;
+	}
+	energia -= (0.1 * velocidade);
+}
+/*---Função para ligar/desligar sinal de emergência---*/
+void Carro::setEmergencia() {
+	if (emergencia) {
+		emergencia = false;
+	}
+	else {
+		emergencia = true;
+	}
 }
