@@ -22,7 +22,7 @@ public:
     const Carro_teste *const *getLugares() const;
     const bool getACorrer() const;
     const string &getAsString() const;
-    void adicionaCarro( Carro_teste *&);
+    void adicionaCarro( Carro_teste &);
     void eliminaCarro( Carro_teste &);
     //void inserePiloto(const Piloto&, const Carro&);
     const void iniciaCorrida() const;

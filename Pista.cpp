@@ -37,7 +37,7 @@ const string &Pista::getAsString() const
     return s;
 }
 
-void Pista::adicionaCarro( Carro_teste *&carro)
+void Pista::adicionaCarro( Carro_teste &carro)
 {
 
     Carro_teste **temp = nullptr;
@@ -46,7 +46,7 @@ void Pista::adicionaCarro( Carro_teste *&carro)
     while (i<n_carros)
     {
         if(i==n_carros-1){
-            temp[i] = carro;
+            temp[i] = &carro;
         }
         else{
             temp[i] = lugares[i];
@@ -65,7 +65,7 @@ void Pista::adicionaCarro( Carro_teste *&carro)
 
 void Pista::eliminaCarro( Carro_teste &carro){
     Carro_teste **temp=nullptr;
-    temp= new Carro_teste*[--n_carros];
+    temp= new Carro_teste*[n_carros-1];
 
     for(int i=0, j=0;i<n_carros;i++)
         if(lugares[i]->getNome()!=carro.getNome()){
@@ -73,4 +73,7 @@ void Pista::eliminaCarro( Carro_teste &carro){
             j++;
         }
     
+    --n_carros;
+    delete[]lugares;
+    lugares=temp;
 }

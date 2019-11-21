@@ -16,6 +16,7 @@ int main()
     cout << p1.getAsString() << endl;
     p1.adicionaCarro(carro2);
     cout << p1.getAsString() << endl;
-    
+    p1.eliminaCarro(carro);
+    cout << p1.getAsString() << endl;
     cout<<"A terminar"<<endl;
 }
