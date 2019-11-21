@@ -12,5 +12,5 @@ int main() {
 	// cout << test;
 	// getchar();
 	// return 0;
-
+	
 }

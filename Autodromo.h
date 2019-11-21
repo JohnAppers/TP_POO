@@ -1,21 +1,22 @@
 #ifndef AUTODROMO_H
 #define AUTODROMO_H
 
-using namespace std;
 
 #include <string>
-#include"Garagem.h"
 #include"Pista.h"
+#include"Carro.h"
+
+class Piloto;
 
 class Autodromo
 {
 private:
     string nome;
     Pista pista;
-    Garagem garagem;
+    Carro **garagem;
     
 public:
-    Autodromo();
+    Autodromo(Pista pista);
     ~Autodromo();
 };
 
