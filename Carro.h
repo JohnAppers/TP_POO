@@ -1,7 +1,6 @@
 #ifndef CARRO_H
 #define CARRO_H
 
-#include <iostream>
 #include <string>
 using namespace std;
 
