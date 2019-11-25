@@ -2,22 +2,22 @@
 #include "Carro.h"
 using namespace std;
 
-Carro::Carro(string marca_p, float energia_p, float energiaMax_p, int velocidadeMax_p, string modelo_p) {
-	static int ascii = 65;			//código ASCII do nome
-	marca = marca_p;
-	modelo = modelo_p;
-	energia = energia_p;
-	energiaMax = energiaMax_p;
-	velocidadeMax = velocidadeMax_p;
-	nome = (char)ascii;
-	if (ascii < 90) {
-		ascii++;					//o próximo carro terá a letra seguinte
-	}	
-	else { 
-		ascii = 63; 				//se a letra anterior for z, define como '?'
-	}		
-}
-/*---Funções para ativar/desativar o acelerador e o travão---*/
+// Carro::Carro(string marca_p, float energia_p, float energiaMax_p, int velocidadeMax_p, string modelo_p) {
+// 	static int ascii = 65;			//cï¿½digo ASCII do nome
+// 	marca = marca_p;
+// 	modelo = modelo_p;
+// 	energia = energia_p;
+// 	energiaMax = energiaMax_p;
+// 	velocidadeMax = velocidadeMax_p;
+// 	nome = (char)ascii;
+// 	if (ascii < 90) {
+// 		ascii++;					//o prï¿½ximo carro terï¿½ a letra seguinte
+// 	}	
+// 	else { 
+// 		ascii = 63; 				//se a letra anterior for z, define como '?'
+// 	}		
+// }
+/*---Funï¿½ï¿½es para ativar/desativar o acelerador e o travï¿½o---*/
 void Carro::acelera() {
 	if (!travao) {
 		acelerador = true;
@@ -38,7 +38,7 @@ void Carro::para_trava() {
 		travao = false;
 	}
 }
-/*---Função de carregamento de energia, fornecendo n por iteração---*/
+/*---Funï¿½ï¿½o de carregamento de energia, fornecendo n por iteraï¿½ï¿½o---*/
 void Carro::carrega(float n) {
 	if (energia <= (energiaMax - n)) {
 		energia += n;
@@ -47,7 +47,7 @@ void Carro::carrega(float n) {
 		energia = energiaMax;
 	}
 }
-/*---Função geral de movimento, acelera ou trava e reduz energia conforme velocidade---*/
+/*---Funï¿½ï¿½o geral de movimento, acelera ou trava e reduz energia conforme velocidade---*/
 void Carro::movimento() {
 	if (acelerador && velocidade < velocidadeMax) {
 		velocidade++;
@@ -57,7 +57,7 @@ void Carro::movimento() {
 	}
 	energia -= (0.1 * velocidade);
 }
-/*---Função para ligar/desligar sinal de emergência---*/
+/*---Funï¿½ï¿½o para ligar/desligar sinal de emergï¿½ncia---*/
 void Carro::setEmergencia() {
 	if (emergencia) {
 		emergencia = false;

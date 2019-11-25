@@ -1,5 +1,5 @@
 #include "Piloto.h"
-#include "Carro.h"
+//#include "Carro.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -8,8 +8,8 @@ int Piloto::dup_count = 1;
 vector<string> Piloto::lista_nomes;
 Piloto::Piloto(string nome_p) {
 	
-	bool dup = false;								//bool para existência de duplicado
-	/*---Algoritmo de configuração de nome---*/
+	bool dup = false;								//bool para existï¿½ncia de duplicado
+	/*---Algoritmo de configuraï¿½ï¿½o de nome---*/
 	for (int i = 0; i < lista_nomes.size(); i++) {				//percorrer a lista de nomes comparando duplicados
 		if (nome_p == lista_nomes.at(i)) {			
 			dup = true;
@@ -28,8 +28,8 @@ Piloto::Piloto(string nome_p) {
 	}
 }
 
-void Piloto::conduz(Carro* c) {
-	if (atual == nullptr) {
-		atual = c;
-	}
-}
+// void Piloto::conduz(Carro* c) {
+// 	if (atual == nullptr) {
+// 		atual = c;
+// 	}
+// }

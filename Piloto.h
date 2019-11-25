@@ -1,7 +1,7 @@
 #ifndef PILOTO_H
 #define PILOTO_H
-#include "Carro.h"
-#include <iostream>
+//#include "Carro.h"
+#include <sstream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -11,13 +11,26 @@ class Piloto {
 	static vector<string> lista_nomes;
 	string nome;
 	bool conduzir = false;
-	Carro* atual;
+	//Carro* atual;
 public:
 	/*---Construtor---*/
 	Piloto(string nome);
-	/*---Funções get---*/
+	/*---Funï¿½ï¿½es get---*/
 	string getNome()const { return nome; }
-	/*---Função para condução de um carro---*/
-	void conduz(Carro* c);
+	/*---Funï¿½ï¿½o para conduï¿½ï¿½o de um carro---*/
+	//void conduz(Carro* c);
+
+
+
+	//====================================================================
+	const string &getAsString() const
+	{
+		ostringstream os;
+		static string s;
+
+		os << "Nome: " << nome << endl;
+		s = os.str();
+		return s;
+	}
 };
 #endif

@@ -3,10 +3,12 @@
 #include <sstream>
 #include <iostream>
 
-Pista::Pista(int max_carros, int comprimento) : comprimento(comprimento >= 0 ? comprimento : DEF_COMP), max_carros(max_carros) {}
+//construtores
+Pista::Pista(int max_carros, int comprimento) : comprimento(comprimento), max_carros(max_carros) {}
 
 Pista::Pista(const Pista &pista) : comprimento(pista.comprimento), max_carros(pista.max_carros) {}
 
+//funcoes get
 const int Pista::getMaxCarros() const { return max_carros; }
 
 const int Pista::getNCarros() const { return n_carros; }
@@ -15,7 +17,7 @@ const int Pista::getComprimento() const { return comprimento; }
 
 const bool Pista::getACorrer() const { return a_correr; }
 
-const Carro_teste* const * Pista::getLugares() const { return lugares; }
+const Carro *const *Pista::getClassificacao() const { return classificacao; }
 
 const string &Pista::getAsString() const
 {
@@ -26,54 +28,63 @@ const string &Pista::getAsString() const
        << "Comprimento: " << comprimento << endl
        << "A correr: " << a_correr << endl;
 
-    if (lugares != nullptr)
+    if (classificacao != nullptr)
     {
         os << "Carros: " << endl;
         for (int i = 0; i < n_carros; i++)
-            os << "[" << i + 1 << "]:" << lugares[i]->getNome() << endl;
-        
+            os << "[" << i + 1 << "]:" << classificacao[i]->getAsString() << endl;
     }
     s = os.str();
     return s;
 }
 
-void Pista::adicionaCarro( Carro_teste &carro)
+//Adiciona/elimina carros
+void Pista::adicionaCarro(Carro &carro)
 {
-
-    Carro_teste **temp = nullptr;
-    temp = new Carro_teste *[++n_carros];
-    int i=0;
-    while (i<n_carros)
+    if (!a_correr)
     {
-        if(i==n_carros-1){
-            temp[i] = &carro;
+        Carro **temp = nullptr;
+        temp = new Carro *[++n_carros];
+        int i = 0;
+        while (i < n_carros)
+        {
+            if (i == n_carros - 1)
+            {
+                temp[i] = &carro;
+            }
+            else
+            {
+                temp[i] = classificacao[i];
+            }
+            i++;
         }
-        else{
-            temp[i] = lugares[i];
-        }
-        i++;
+
+        if (temp != classificacao)
+            delete[] classificacao;
+
+        classificacao = temp;
     }
-    
-    
-
-    if (temp != lugares)
-        delete[] lugares;
-
-
-    lugares = temp;
 }
 
-void Pista::eliminaCarro( Carro_teste &carro){
-    Carro_teste **temp=nullptr;
-    temp= new Carro_teste*[n_carros-1];
+void Pista::eliminaCarro(Carro &carro)
+{
+    Carro **temp = nullptr;
+    temp = new Carro *[n_carros - 1];
 
-    for(int i=0, j=0;i<n_carros;i++)
-        if(lugares[i]->getNome()!=carro.getNome()){
-            temp[j]=lugares[i];
+    for (int i = 0, j = 0; i < n_carros; i++)
+        if (classificacao[i]->getNome() != carro.getNome())
+        {
+            temp[j] = classificacao[i];
             j++;
         }
-    
-    --n_carros;
-    delete[]lugares;
-    lugares=temp;
+
+    n_carros--;
+    delete[] classificacao;
+    classificacao = temp;
 }
+
+void Pista::inserePiloto( Piloto &piloto, Carro &carro)
+{
+    carro.atribuiPiloto(piloto);
+}
+

@@ -17,7 +17,7 @@ private:
     
 public:
     Autodromo(Pista pista);
-    ~Autodromo();
+
 };
 
 #endif
