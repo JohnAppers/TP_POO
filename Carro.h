@@ -20,7 +20,7 @@ class Carro
 
 public:
 	//construtor com valor de modelo por defini��o
-	//Carro(string marca, float energia, float energiaMax, int velocidadeMax, string modelo = "modelo base");
+	Carro(string marca, float energia, float energiaMax, int velocidadeMax, string modelo = "modelo base");
 
 	//fun��es get
 	char getNome() const { return nome; }
@@ -56,22 +56,6 @@ public:
 		return s;
 	}
 
-	Carro(string marca_p, float energia_p, float energiaMax_p, string modelo_p="modelo base")
-	{
-		static int ascii = 65; //c�digo ASCII do nome
-		marca = marca_p;
-		modelo = modelo_p;
-		energia = energia_p;
-		energiaMax = energiaMax_p;
-		nome = (char)ascii;
-		if (ascii < 90)
-		{
-			ascii++; //o pr�ximo carro ter� a letra seguinte
-		}
-		else
-		{
-			ascii = 63; //se a letra anterior for z, define como '?'
-		}
-	}
+
 };
 #endif

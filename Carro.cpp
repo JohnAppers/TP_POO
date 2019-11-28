@@ -2,21 +2,21 @@
 #include "Carro.h"
 using namespace std;
 
-// Carro::Carro(string marca_p, float energia_p, float energiaMax_p, int velocidadeMax_p, string modelo_p) {
-// 	static int ascii = 65;			//c�digo ASCII do nome
-// 	marca = marca_p;
-// 	modelo = modelo_p;
-// 	energia = energia_p;
-// 	energiaMax = energiaMax_p;
-// 	velocidadeMax = velocidadeMax_p;
-// 	nome = (char)ascii;
-// 	if (ascii < 90) {
-// 		ascii++;					//o pr�ximo carro ter� a letra seguinte
-// 	}	
-// 	else { 
-// 		ascii = 63; 				//se a letra anterior for z, define como '?'
-// 	}		
-// }
+Carro::Carro(string marca_p, float energia_p, float energiaMax_p, int velocidadeMax_p, string modelo_p) {
+	static int ascii = 65;			//c�digo ASCII do nome
+	marca = marca_p;
+	modelo = modelo_p;
+	energia = energia_p;
+	energiaMax = energiaMax_p;
+	velocidadeMax = velocidadeMax_p;
+	nome = (char)ascii;
+	if (ascii < 90) {
+		ascii++;					//o pr�ximo carro ter� a letra seguinte
+	}	
+	else { 
+		ascii = 63; 				//se a letra anterior for z, define como '?'
+	}		
+}
 /*---Fun��es para ativar/desativar o acelerador e o trav�o---*/
 void Carro::acelera() {
 	if (!travao) {
