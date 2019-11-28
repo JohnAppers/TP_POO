@@ -10,10 +10,17 @@ class DGV
     vector<Piloto> pilotos;
 
 public:
-    void adicionaCarro(Carro carro);
-    void retiraCarro(Carro &carro);
-    void adicionaPiloto(Piloto &piloto);
-    void retiraPiloto(Piloto &piloto);
+    void adiciona(Carro carro);
+    void adiciona(Piloto piloto);
+    //retira carro
+    void retira(char id);
+    //retira piloto
+    void retira(string nome);
+
+    //Devolve carro com o mesmo id que "id"
+    Carro *getCarro(char id);
+    //devolve o piloto com o mesmo nome que "nome"
+    Piloto *getPiloto(string nome);
 
     const string &getCarrosAsString() const;
     const string &getPilotosAsString() const;

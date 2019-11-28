@@ -1,20 +1,36 @@
 #include "DGV.h"
 #include <sstream>
 
-void DGV::adicionaCarro(Carro carro)
+void DGV::adiciona(Carro carro)
 {
     carros.push_back(carro);
 }
 
-void DGV::retiraCarro(Carro &carro)
+// void DGV::retira(Carro &carro)
+// {
+//     for (auto i = 0; i < carros.size(); i++)
+//     {
+//         if (carros[i].getNome() == carro.getNome())
+//         {
+//             carros.erase(carros.begin() + i);
+//         }
+//     }
+// }
+
+void DGV::retira(char id)
 {
-    for (auto i = 0; i < carros.size(); i++)
-    {
-        if (carros[i].getNome() == carro.getNome())
+    for (int i = 0; i < carros.size(); i++)
+        if (carros[i].getNome() == id)
         {
             carros.erase(carros.begin() + i);
         }
-    }
+}
+
+void DGV::retira(string nome)
+{
+    for (int i = 0; i < pilotos.size(); i++)
+        if (pilotos[i].getNome() == nome)
+            pilotos.erase(pilotos.begin() + i);
 }
 
 const string &DGV::getCarrosAsString() const
@@ -29,22 +45,35 @@ const string &DGV::getCarrosAsString() const
     return s;
 }
 
-void DGV::adicionaPiloto(Piloto &piloto)
+void DGV::adiciona(Piloto piloto)
 {
     pilotos.push_back(piloto);
 }
 
-void DGV::retiraPiloto(Piloto &piloto)
+void DGV::retira(string nome)
 {
-    for (auto i = 0; i < carros.size(); i++)
+    for (auto i = 0; i < pilotos.size(); i++)
     {
-        if (pilotos[i].getNome() == piloto.getNome())
+        if (pilotos[i].getNome() == nome)
         {
             pilotos.erase(pilotos.begin() + i);
         }
     }
 }
 
+Carro *DGV::getCarro(char id)
+{
+    for (int i = 0; i < carros.size(); i++)
+        if (carros[i].getNome == id)
+            return &(carros[i]);
+}
+
+Piloto *DGV::getPiloto(string nome)
+{
+    for (int i = 0; i < pilotos.size(); i++)
+        if (pilotos[i].getNome == nome)
+            return &(pilotos[i]);
+}
 const string &DGV::getPilotosAsString() const
 {
     ostringstream os;
@@ -62,10 +91,10 @@ const string &DGV::getAsString() const
     ostringstream os;
     static string s;
 
-    os<<"============Carros============="<<endl
-        <<this->getCarrosAsString()<<endl
-        <<"=============Pilotos==========="<<endl
-        <<this->getPilotosAsString()<<endl;
+    os << "============Carros=============" << endl
+       << this->getCarrosAsString() << endl
+       << "=============Pilotos===========" << endl
+       << this->getPilotosAsString() << endl;
 
     s = os.str();
     return s;

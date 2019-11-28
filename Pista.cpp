@@ -8,6 +8,11 @@ Pista::Pista(int max_carros, int comprimento) : comprimento(comprimento), max_ca
 
 Pista::Pista(const Pista &pista) : comprimento(pista.comprimento), max_carros(pista.max_carros) {}
 
+//Destrutores
+Pista::~Pista()
+{
+}
+
 //funcoes get
 const int Pista::getMaxCarros() const { return max_carros; }
 
@@ -83,8 +88,31 @@ void Pista::eliminaCarro(Carro &carro)
     classificacao = temp;
 }
 
-void Pista::inserePiloto( Piloto &piloto, Carro &carro)
+//insere piloto num carro
+void Pista::inserePiloto(Piloto &piloto, Carro &carro)
 {
     carro.atribuiPiloto(piloto);
 }
 
+void Pista::iniciaCorrida()
+{   
+    /*
+    TODO verificar se todos os carros tem pilotos
+    */
+    if (n_carros > 2)
+    {
+        a_correr=true;
+    }
+}
+
+void Pista::avanca(int tempo){
+    
+    if(!a_correr){
+        return;
+    }
+
+    /*
+    
+    */
+
+}

@@ -21,6 +21,9 @@ public:
     Pista(int max_carros, const int comprimento);
     Pista(const Pista &);
 
+    //Destrutores
+    ~Pista();
+
     //funcoes get
     const int getMaxCarros() const;
     const int getNCarros() const;
@@ -29,6 +32,9 @@ public:
     const bool getACorrer() const;
     const string &getAsString() const;
 
+    //funcoes set
+    void setMaxCarros(int max_carros);
+    void setComprimento(int comprimento);
     //adiciona/elimina Carro ao array
     void adicionaCarro(Carro &);
     void eliminaCarro(Carro &);
@@ -36,8 +42,8 @@ public:
     //Insere piloto num carro
     void inserePiloto(Piloto &piloto, Carro &carro);
 
-    void iniciaCorrida() const;
-    void avancar(int tempo);
+    void iniciaCorrida();
+    void avanca(int tempo);
     void terminaCorrida() const;
 
     //inline const int getComprimento() const{return this->comprimento;};

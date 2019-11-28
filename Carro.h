@@ -37,9 +37,9 @@ public:
 
 	//========================================================================
 	//Atribuir piloto
-	void atribuiPiloto(Piloto &piloto)
+	void atribuiPiloto(Piloto *piloto)
 	{
-		this->piloto = &piloto;
+		this->piloto = piloto;
 	}
 
 	const string &getAsString() const
@@ -56,7 +56,7 @@ public:
 		return s;
 	}
 
-	Carro(string marca_p, float energia_p, float energiaMax_p, string modelo_p)
+	Carro(string marca_p, float energia_p, float energiaMax_p, string modelo_p="modelo base")
 	{
 		static int ascii = 65; //c�digo ASCII do nome
 		marca = marca_p;

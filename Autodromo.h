@@ -1,10 +1,9 @@
 #ifndef AUTODROMO_H
 #define AUTODROMO_H
 
-
 #include <string>
-#include"Pista.h"
-#include"Carro.h"
+#include "Pista.h"
+#include "Carro.h"
 
 class Piloto;
 
@@ -14,10 +13,11 @@ private:
     string nome;
     Pista pista;
     Carro **garagem;
-    
-public:
-    Autodromo(Pista pista);
 
+public:
+    Autodromo(int max_carros, int comprimento, string nome);
+    ~Autodromo();
+    const string &getAsString() const;
 };
 
 #endif
