@@ -6,8 +6,8 @@ void *Simulador::carregaC(string file_name)
 {
     ifstream f;
     string line;
-    vector<Carro> v;
-    int capacidadeInicial, capacidadeMaxima;
+    
+    int capacidadeInicial, capacidadeMaxima, velocidadeMax;
     string marca, modelo;
 
     f.open(file_name);
@@ -15,10 +15,10 @@ void *Simulador::carregaC(string file_name)
     while (getline(f, line))
     {
         istringstream is(line);
-        if (!(is >> capacidadeInicial >> capacidadeMaxima >> marca >> modelo))
+        if (!(is >> capacidadeInicial >> capacidadeMaxima >> velocidadeMax >> marca >> modelo))
             return nullptr;
 
-        dgv.adiciona(Carro(marca, capacidadeInicial, capacidadeMaxima, modelo));
+        dgv.adiciona(Carro(marca, capacidadeInicial, capacidadeMaxima, velocidadeMax, modelo));
     }
     f.close();
 }
@@ -27,7 +27,7 @@ void *Simulador::carregaP(string file_name)
 {
     ifstream f;
     string line;
-    vector<Piloto> v;
+    
     string nome;
 
     f.open(file_name);
@@ -46,7 +46,7 @@ void *Simulador::carregaA(string file_name)
 {
     ifstream f;
     string line;
-    vector<Autodromo> v;
+    
     int max_carros, comprimento;
     string nome;
 
@@ -63,10 +63,10 @@ void *Simulador::carregaA(string file_name)
     f.close();
 }
 
-void Simulador::cria(char tipo, string marca, int capacidadeInicial, int capacidadeMaxima, string modelo)
+void Simulador::cria(char tipo, string marca, int capacidadeInicial, int capacidadeMaxima, int velocidadeMax, string modelo)
 {
     if (tipo == 'c')
-        dgv.adiciona(Carro(marca, capacidadeInicial, capacidadeMaxima, modelo));
+        dgv.adiciona(Carro(marca, capacidadeInicial, capacidadeMaxima, velocidadeMax, modelo));
 }
 
 void Simulador::cria(char tipo, string nome)
@@ -81,13 +81,15 @@ void Simulador::cria(char tipo, int max_carros, int comprimento, string nome)
         campeonato.adiciona(Autodromo(max_carros, comprimento, nome));
 }
 
-void Simulador::apaga(char tipo, string id){
+void Simulador::apaga(char tipo, string id)
+{
 
     switch (tipo)
     {
     case 'c':
-        if(id.length()==1){
-            dgv.retira(id[0]);    
+        if (id.length() == 1)
+        {
+            dgv.retira(id[0]);
         }
         break;
     case 'p':
@@ -103,12 +105,13 @@ void Simulador::apaga(char tipo, string id){
     }
 }
 
-void Simulador::entraCarro(char id, string nome){
+void Simulador::entraCarro(char id, string nome)
+{
     dgv.getCarro(id)->atribuiPiloto(dgv.getPiloto(nome));
 }
 
-void Simulador::saiCarro(char id, string nome){
-    
+void Simulador::saiCarro(char id, string nome)
+{
 }
 DGV &Simulador::getDGV()
 {

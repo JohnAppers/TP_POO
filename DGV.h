@@ -17,9 +17,9 @@ public:
     //retira piloto
     void retira(string nome);
 
-    //Devolve carro com o mesmo id que "id"
+    //Devolve carro com o id dado
     Carro *getCarro(char id);
-    //devolve o piloto com o mesmo nome que "nome"
+    //devolve o piloto com o nome dado
     Piloto *getPiloto(string nome);
 
     const string &getCarrosAsString() const;

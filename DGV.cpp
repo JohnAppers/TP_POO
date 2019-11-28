@@ -6,16 +6,10 @@ void DGV::adiciona(Carro carro)
     carros.push_back(carro);
 }
 
-// void DGV::retira(Carro &carro)
-// {
-//     for (auto i = 0; i < carros.size(); i++)
-//     {
-//         if (carros[i].getNome() == carro.getNome())
-//         {
-//             carros.erase(carros.begin() + i);
-//         }
-//     }
-// }
+void DGV::adiciona(Piloto piloto)
+{
+    pilotos.push_back(piloto);
+}
 
 void DGV::retira(char id)
 {
@@ -29,6 +23,7 @@ void DGV::retira(char id)
 void DGV::retira(string nome)
 {
     for (int i = 0; i < pilotos.size(); i++)
+    
         if (pilotos[i].getNome() == nome)
             pilotos.erase(pilotos.begin() + i);
 }
@@ -45,34 +40,22 @@ const string &DGV::getCarrosAsString() const
     return s;
 }
 
-void DGV::adiciona(Piloto piloto)
-{
-    pilotos.push_back(piloto);
-}
-
-void DGV::retira(string nome)
-{
-    for (auto i = 0; i < pilotos.size(); i++)
-    {
-        if (pilotos[i].getNome() == nome)
-        {
-            pilotos.erase(pilotos.begin() + i);
-        }
-    }
-}
-
 Carro *DGV::getCarro(char id)
 {
     for (int i = 0; i < carros.size(); i++)
-        if (carros[i].getNome == id)
+        if (carros[i].getNome() == id)
             return &(carros[i]);
+        else
+            return nullptr;
 }
 
 Piloto *DGV::getPiloto(string nome)
 {
     for (int i = 0; i < pilotos.size(); i++)
-        if (pilotos[i].getNome == nome)
+        if (pilotos[i].getNome() == nome)
             return &(pilotos[i]);
+        else
+            return nullptr;
 }
 const string &DGV::getPilotosAsString() const
 {

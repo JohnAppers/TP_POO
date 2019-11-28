@@ -18,7 +18,7 @@ public:
     void *carregaA(string file_name);
 
     //Cria carro
-    void cria(char tipo, string marca, int capacidadeInicial, int capacidadeMaxima, string modelo);
+    void cria(char tipo, string marca, int capacidadeInicial, int capacidadeMaxima, int velocidadeMax, string modelo);
     //cria Piloto
     void cria(char tipo, string nome);
     //cria Autodromo

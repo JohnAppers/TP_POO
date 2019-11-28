@@ -91,7 +91,10 @@ void Pista::eliminaCarro(Carro &carro)
 //insere piloto num carro
 void Pista::inserePiloto(Piloto &piloto, Carro &carro)
 {
-    carro.atribuiPiloto(piloto);
+    /*
+    TODO atribui piloto a carro
+    */
+    //carro.atribuiPiloto(piloto);
 }
 
 void Pista::iniciaCorrida()

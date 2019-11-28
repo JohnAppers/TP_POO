@@ -18,6 +18,7 @@ public:
     Autodromo(int max_carros, int comprimento, string nome);
     ~Autodromo();
     const string &getAsString() const;
+    const string &getNome() const;
 };
 
 #endif
