@@ -76,10 +76,7 @@ const string &DGV::getAsString() const
     ostringstream os;
     static string s;
 
-    os << "============Carros=============" << endl
-       << this->getCarrosAsString() << endl
-       << "=============Pilotos===========" << endl
-       << this->getPilotosAsString() << endl;
+    os << this->getPilotosAsString() << endl;
 
     s = os.str();
     return s;

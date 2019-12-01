@@ -14,7 +14,7 @@ class Simulador
 public:
     //Escolhe modo do jogo
     void escolheModo(int i);
-    const int GetModo()const;
+    const int GetModo() const;
     //Carrega lista de carros do ficheiro, retorna null em caso de erro
     void *carregaC(string file_name);
     //Carrega lista de Pilotos do ficheiro, retorna null em caso de erro
@@ -23,23 +23,26 @@ public:
     void *carregaA(string file_name);
 
     //Cria carro
-    void* cria(char tipo, string marca, int capacidadeInicial, int capacidadeMaxima, int velocidadeMax, string modelo= "-1");
+    void *cria(char tipo, string marca, int capacidadeInicial, int capacidadeMaxima, int velocidadeMax, string modelo = "-1");
     //cria Piloto
-    void* cria(char tipo, string nome);
+    void *cria(char tipo, string nome);
     //cria Autodromo
-    void* cria(char tipo, int max_carros, int comprimento, string nome);
+    void *cria(char tipo, int max_carros, int comprimento, string nome);
 
     //Apaga carro/Piloto/Autodromo
-    void* apaga(char tipo, string id);
+    void *apaga(char tipo, string id);
 
     //Associa um carro a um piloto
     void entraCarro(char id, string nome);
     //retira piloto de um carro
     void saiCarro(char id, string nome);
 
-    const string& lista() const;
+    const string &lista() const;
 
-    const string& Simulador::listaCarros() const;
+    const string &listaCarros() const;
+
+    bool carregaBat(char id, float Q);
+    
 
     DGV &getDGV();
     Campeonato &getCampeonato();

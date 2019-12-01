@@ -128,26 +128,41 @@ const string &Simulador::lista() const
     ostringstream os;
     static string s;
 
-    if(modoCampeonato==1)
+    if (modoCampeonato == 1)
         os << dgv.getAsString() << endl
-            << campeonato.getAsString() << endl;
-    
-    s=os.str();
+           << campeonato.getAsString() << endl;
+
+    s = os.str();
     return s;
 }
 
-const string& Simulador::listaCarros() const{
- return dgv.getCarrosAsString();
+const string &Simulador::listaCarros() const
+{
+    return dgv.getCarrosAsString();
+}
+
+bool Simulador::carregaBat(char id, float Q)
+{
+    if (modoCampeonato == 2){
+        dgv.getCarro(id)->carrega(Q);
+        return true;
+    }else
+    
+        return false;
+    
+    
 }
 
 void Simulador::entraCarro(char id, string nome)
 {
-    //dgv.getCarro(id)->atribuiPiloto(dgv.getPiloto(nome));
+    dgv.getPiloto(nome)->conduz(dgv.getCarro(id));
 }
 
 void Simulador::saiCarro(char id, string nome)
 {
+    dgv.getPiloto(nome)->conduz(nullptr);
 }
+
 DGV &Simulador::getDGV()
 {
     return dgv;

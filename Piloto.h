@@ -11,7 +11,7 @@ class Piloto {
 	static vector<string> lista_nomes;
 	string nome;
 	bool conduzir = false;
-	Carro* atual;
+	Carro* atual=nullptr;
 public:
 	/*---Construtor---*/
 	Piloto(string nome);

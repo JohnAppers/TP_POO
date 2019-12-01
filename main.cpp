@@ -98,6 +98,7 @@ int main() {
 //		}
 		getline(comando, comando_str, ' ');
 		cout << comando_str;
+		cout<<comando.str();
 		if (comando_str == "carregaP") {
 			comando_str = "";
 			comando >> comando_str;
@@ -195,7 +196,8 @@ int main() {
 			cout << "                           ";
 			gotoxy(50, 28);
 			cout << comando_str;
-			cout << " l ";
+			cout<<comando.str();
+			
 			//cout << "Comando invalido.";
 			comando.str() = "";
 			comando_str = "";

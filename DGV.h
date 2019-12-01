@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "Carro.h"
-#include"Piloto.h"
+#include "Piloto.h"
 
 class DGV
 {
@@ -22,6 +22,8 @@ public:
     Carro *getCarro(char id);
     //devolve o piloto com o nome dado
     Piloto *getPiloto(string nome);
+
+    const int getNumCarros() const { return (int)carros.size(); };
 
     const string &getCarrosAsString() const;
     const string &getPilotosAsString() const;

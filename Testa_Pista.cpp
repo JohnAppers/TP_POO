@@ -6,19 +6,28 @@ int main()
     Simulador simu;
     simu.escolheModo(1);
     simu.carregaA("autodromos.txt");
+    string s="pilotos.txt";
     simu.carregaC("carros.txt");
-    simu.carregaP("pilotos.txt");
-
-    cout << simu.cria('p', "Sergio");
+    simu.carregaP(s);
+    cout<< simu.lista();
+    simu.cria('p', "Sergio");
     simu.cria('a', 5, 100, "Auto");
     simu.cria('c', "fiat", 10, 100, 150);
 
-    cout << simu.getDGV().getAsString();
-    cout << simu.getCampeonato().getAsString();
     simu.apaga('p', "Sergio");
     simu.apaga('a', "Auto");
     simu.apaga('c', "C");
 
-    cout << simu.getDGV().getAsString();
-    cout << simu.getCampeonato().getAsString();
+    // cout << simu.lista();
+    // cout << simu.listaCarros();
+    
+    simu.entraCarro('A', "Sergio1");
+    
+    cout<<simu.getDGV().getPiloto("Sergio1")->getAsString();
+    
+    // cout << simu.lista();
+    // simu.entraCarro('B', "Gil");
+    // simu.saiCarro('B', "Gil");
+    // cout << simu.lista();
+    // cout << simu.listaCarros();
 }

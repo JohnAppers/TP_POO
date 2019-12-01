@@ -19,7 +19,7 @@ public:
     ~Autodromo();
     const string &getAsString() const;
     const string &getNome() const;
-
+    const Pista &getPista()const{return pista;};
     //redefinição do operador =
     Autodromo& operator=(const Autodromo& autodromo);
 };

@@ -32,13 +32,23 @@ Piloto::Piloto(string nome_p)
 		lista_nomes.push_back(nome_p);
 	}
 }
-
+/*
+!erro ao fazer atribuicao
+*/
 void Piloto::conduz(Carro *c)
 {
+	cout << c->getAsString();
+
+	cout << c->getAsString();
 	if (atual == nullptr)
 	{
+
 		atual = c;
 	}
+	else{
+
+	}
+	cout << c->getAsString();
 }
 
 const string &Piloto::getAsString() const
@@ -47,7 +57,11 @@ const string &Piloto::getAsString() const
 	static string s;
 
 	os << "Nome: " << nome << endl;
-	  
+
+	if (atual != nullptr)
+		os << "A conduzir: " << endl
+		   << atual->getAsString() << endl;
+
 	s = os.str();
 	return s;
 }
