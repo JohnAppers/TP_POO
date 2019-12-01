@@ -2,9 +2,6 @@
 #define CARRO_H
 
 #include <string>
-#include "Piloto.h"
-#include <sstream>
-
 using namespace std;
 
 class Carro
@@ -15,9 +12,6 @@ class Carro
 	int velocidadeMax, velocidade;
 	bool acelerador = false, travao = false, emergencia = false, condutor = false, dano = false;
 
-	//atribuir piloto
-	Piloto *piloto;
-
 public:
 	//construtor com valor de modelo por defini��o
 	Carro(string marca, float energia, float energiaMax, int velocidadeMax, string modelo = "modelo base");
@@ -25,7 +19,7 @@ public:
 	//fun��es get
 	char getNome() const { return nome; }
 	int getVelocidade() const { return velocidade; };
-
+	const bool getEmergengia() { return emergencia; };
 	//fun��es de controlo do carro
 	void acelera();
 	void para_acelera();
@@ -34,28 +28,6 @@ public:
 	void carrega(float n);
 	void movimento();
 	void setEmergencia();
-
-	//========================================================================
-	//Atribuir piloto
-	void atribuiPiloto(Piloto *piloto)
-	{
-		this->piloto = piloto;
-	}
-
-	const string &getAsString() const
-	{
-		ostringstream os;
-		static string s;
-
-		os << "Nome: " << nome << endl
-		   << "Marco: " << marca << endl
-		   << "Modelo: " << modelo << endl
-		   << "Energia: " << energia << endl
-		   << "Energia maxima: " << energiaMax << endl;
-		s = os.str();
-		return s;
-	}
-
-
+	const string &getAsString() const;
 };
 #endif

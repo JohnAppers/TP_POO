@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Carro.h"
+#include"Piloto.h"
 
 class DGV
 {

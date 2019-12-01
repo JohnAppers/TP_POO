@@ -6,11 +6,25 @@
 //construtores
 Pista::Pista(int max_carros, int comprimento) : comprimento(comprimento), max_carros(max_carros) {}
 
-Pista::Pista(const Pista &pista) : comprimento(pista.comprimento), max_carros(pista.max_carros) {}
+Pista::Pista(const Pista &pista) : comprimento(pista.comprimento), max_carros(pista.max_carros) {
+    n_carros=pista.n_carros;
+    classificacao=new Carro*[n_carros];
+
+    for(int i = 0; i<n_carros; i++)
+        classificacao[i]=pista.classificacao[i];
+
+    a_correr=pista.a_correr;
+
+}
 
 //Destrutores
 Pista::~Pista()
 {
+    for (int i = 0; i < n_carros; i++)
+    {
+        delete[] classificacao[i];
+    }
+    delete[] classificacao;
 }
 
 //funcoes get
@@ -44,7 +58,7 @@ const string &Pista::getAsString() const
 }
 
 //Adiciona/elimina carros
-void Pista::adicionaCarro(Carro &carro)
+int Pista::adicionaCarro(Carro &carro)
 {
     if (!a_correr)
     {
@@ -69,6 +83,8 @@ void Pista::adicionaCarro(Carro &carro)
 
         classificacao = temp;
     }
+    else
+        return -1;
 }
 
 void Pista::eliminaCarro(Carro &carro)
@@ -89,33 +105,51 @@ void Pista::eliminaCarro(Carro &carro)
 }
 
 //insere piloto num carro
-void Pista::inserePiloto(Piloto &piloto, Carro &carro)
-{
-    /*
-    TODO atribui piloto a carro
-    */
-    //carro.atribuiPiloto(piloto);
-}
+// void Pista::inserePiloto(Piloto &piloto, Carro &carro)
+// {
+//     /*
+//     TODO atribui piloto a carro
+//     */
+//     //carro.atribuiPiloto(piloto);
+// }
 
-void Pista::iniciaCorrida()
-{   
+int Pista::iniciaCorrida()
+{
     /*
     TODO verificar se todos os carros tem pilotos
     */
-    if (n_carros > 2)
+    if (n_carros >= 2)
+
+        a_correr = true;
+    else
+        return -1;
+}
+
+void Pista::avanca(int tempo)
+{
+
+    if (!a_correr)
     {
-        a_correr=true;
+        for (int i = 0; i < n_carros; i++)
+        {
+            /*
+            TODO chamar funcao para avançar carros
+            */
+        }
     }
 }
 
-void Pista::avanca(int tempo){
-    
-    if(!a_correr){
-        return;
-    }
+Carro const *Pista::verificaEmergencia()
+{
+}
 
-    /*
+Pista &Pista::operator=(const Pista &pista)
+{
+    max_carros = pista.max_carros;
+    n_carros = pista.n_carros;
+    comprimento=pista.comprimento;
+    a_correr=pista.a_correr;
+    for(int i = 0; i<n_carros;i++)
+        classificacao[i]=pista.classificacao[i];
     
-    */
-
 }

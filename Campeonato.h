@@ -4,6 +4,7 @@
 #include <vector>
 #include "Autodromo.h"
 
+
 class Campeonato
 {
 
@@ -13,6 +14,7 @@ class Campeonato
 public:
     void adiciona(Autodromo autodromo);
     void retira(string nome);
+    const string&  getAsString()const;
     vector<Autodromo>& getAutodromo();
 };
 

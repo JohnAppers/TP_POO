@@ -13,19 +13,21 @@ void DGV::adiciona(Piloto piloto)
 
 void DGV::retira(char id)
 {
-    for (int i = 0; i < carros.size(); i++)
+    for (int i = 0; i < carros.size();)
         if (carros[i].getNome() == id)
-        {
             carros.erase(carros.begin() + i);
-        }
+        else
+            i++;
 }
 
 void DGV::retira(string nome)
 {
-    for (int i = 0; i < pilotos.size(); i++)
-    
+    for (int i = 0; i < pilotos.size();)
+
         if (pilotos[i].getNome() == nome)
             pilotos.erase(pilotos.begin() + i);
+        else
+            i++;
 }
 
 const string &DGV::getCarrosAsString() const
@@ -82,3 +84,5 @@ const string &DGV::getAsString() const
     s = os.str();
     return s;
 }
+
+

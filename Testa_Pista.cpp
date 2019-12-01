@@ -3,29 +3,22 @@
 
 int main()
 {
-    Simulador sim;
-    
+    Simulador simu;
+    simu.escolheModo(1);
+    simu.carregaA("autodromos.txt");
+    simu.carregaC("carros.txt");
+    simu.carregaP("pilotos.txt");
 
-    // sim.carregaC("carros.txt");
-    // Carro carro("Fiat", 30, 100);
-    // Carro carro2("Punto", 20, 110);
-    // sim.getDGV().adiciona(carro);
-    // sim.getDGV().adiciona(carro2);
-    // sim.getDGV().retira(carro);
-    // sim.carregaP("pilotos.txt");
-    // Piloto piloto("Jose");
-    // Piloto piloto2("toino");
-    // sim.getDGV().adiciona(piloto);
-    // sim.getDGV().adiciona(piloto2);
-    // sim.getDGV().retira(piloto);
-    // cout<<sim.getDGV().getAsString();
-    sim.carregaA("autodromos.txt");
-    
-    for(const auto& a : sim.getCampeonato().getAutodromo()){
-        cout<< a.getAsString();
-    }
+    cout << simu.cria('p', "Sergio");
+    simu.cria('a', 5, 100, "Auto");
+    simu.cria('c', "fiat", 10, 100, 150);
 
+    cout << simu.getDGV().getAsString();
+    cout << simu.getCampeonato().getAsString();
+    simu.apaga('p', "Sergio");
+    simu.apaga('a', "Auto");
+    simu.apaga('c', "C");
 
-    // cout<<sim.getDGV().getAsString();
-    // cout<<"A terminar"<<endl;
+    cout << simu.getDGV().getAsString();
+    cout << simu.getCampeonato().getAsString();
 }

@@ -1,14 +1,20 @@
 #include "Simulador.h"
-#include <iostream>
+#include <sstream>
 #include <fstream>
 
+void Simulador::escolheModo(int i)
+{
+    modoCampeonato = i;
+}
 void *Simulador::carregaC(string file_name)
 {
+
     ifstream f;
-    string line;
-    
+    string line, marca, modelo;
     int capacidadeInicial, capacidadeMaxima, velocidadeMax;
-    string marca, modelo;
+
+    if (modoCampeonato == 2)
+        return nullptr;
 
     f.open(file_name);
 
@@ -26,9 +32,10 @@ void *Simulador::carregaC(string file_name)
 void *Simulador::carregaP(string file_name)
 {
     ifstream f;
-    string line;
-    
-    string nome;
+    string line, nome;
+
+    if (modoCampeonato == 2)
+        return nullptr;
 
     f.open(file_name);
 
@@ -46,9 +53,12 @@ void *Simulador::carregaA(string file_name)
 {
     ifstream f;
     string line;
-    
+
     int max_carros, comprimento;
     string nome;
+
+    if (modoCampeonato == 2)
+        return nullptr;
 
     f.open(file_name);
 
@@ -63,27 +73,38 @@ void *Simulador::carregaA(string file_name)
     f.close();
 }
 
-void Simulador::cria(char tipo, string marca, int capacidadeInicial, int capacidadeMaxima, int velocidadeMax, string modelo)
+void *Simulador::cria(char tipo, string marca, int capacidadeInicial, int capacidadeMaxima, int velocidadeMax, string modelo)
 {
-    if (tipo == 'c')
-        dgv.adiciona(Carro(marca, capacidadeInicial, capacidadeMaxima, velocidadeMax, modelo));
+    if (tipo == 'c' && modoCampeonato == 1)
+        if (modelo.compare("-1") != 0)
+            dgv.adiciona(Carro(marca, capacidadeInicial, capacidadeMaxima, velocidadeMax, modelo));
+        else
+            dgv.adiciona(Carro(marca, capacidadeInicial, capacidadeMaxima, velocidadeMax));
+
+    else
+        return nullptr;
 }
 
-void Simulador::cria(char tipo, string nome)
+void *Simulador::cria(char tipo, string nome)
 {
-    if (tipo == 'p')
+    if (tipo == 'p' && modoCampeonato == 1)
         dgv.adiciona(Piloto(nome));
+    else
+        return nullptr;
 }
 
-void Simulador::cria(char tipo, int max_carros, int comprimento, string nome)
+void *Simulador::cria(char tipo, int max_carros, int comprimento, string nome)
 {
-    if (tipo == 'a')
+    if (tipo == 'a' && modoCampeonato == 1)
         campeonato.adiciona(Autodromo(max_carros, comprimento, nome));
+    else
+        return nullptr;
 }
 
-void Simulador::apaga(char tipo, string id)
+void *Simulador::apaga(char tipo, string id)
 {
-
+    if (modoCampeonato == 2)
+        return nullptr;
     switch (tipo)
     {
     case 'c':
@@ -98,16 +119,30 @@ void Simulador::apaga(char tipo, string id)
     case 'a':
         campeonato.retira(id);
     default:
-        /*
-        !Opcao invalida
-        */
-        break;
+        return nullptr;
     }
+}
+
+const string &Simulador::lista() const
+{
+    ostringstream os;
+    static string s;
+
+    if(modoCampeonato==1)
+        os << dgv.getAsString() << endl
+            << campeonato.getAsString() << endl;
+    
+    s=os.str();
+    return s;
+}
+
+const string& Simulador::listaCarros() const{
+ return dgv.getCarrosAsString();
 }
 
 void Simulador::entraCarro(char id, string nome)
 {
-    dgv.getCarro(id)->atribuiPiloto(dgv.getPiloto(nome));
+    //dgv.getCarro(id)->atribuiPiloto(dgv.getPiloto(nome));
 }
 
 void Simulador::saiCarro(char id, string nome)

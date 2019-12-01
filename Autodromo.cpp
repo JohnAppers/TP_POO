@@ -7,7 +7,8 @@ Autodromo::Autodromo(int max_carros, int comprimento, string nome) : pista(max_c
 
 Autodromo::~Autodromo()
 {
-    
+    for(auto c: garagem)
+        delete c;
 }
 
 const string &Autodromo::getAsString() const
@@ -21,3 +22,10 @@ const string &Autodromo::getAsString() const
 }
 
 const string &Autodromo::getNome() const { return nome; }
+
+
+Autodromo& Autodromo::operator=(const Autodromo& autodromo){
+    nome=autodromo.nome;
+    pista=autodromo.pista;
+    garagem=autodromo.garagem;
+}

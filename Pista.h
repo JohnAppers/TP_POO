@@ -10,7 +10,7 @@ class Pista
         //numero de carros no array
         n_carros = 0;
     //comprimento da pista
-    const int comprimento;
+    int comprimento;
     //Ponteiro para os carros que estão na pista
     Carro **classificacao = nullptr;
     //para saber se está a decorrer uma corrida
@@ -35,17 +35,23 @@ public:
     //funcoes set
     void setMaxCarros(int max_carros);
     void setComprimento(int comprimento);
-    //adiciona/elimina Carro ao array
-    void adicionaCarro(Carro &);
+
+    //adiciona Carro ao array
+    //retorna -1 em caso não seja possivel adicionar
+    int adicionaCarro(Carro &);
+    //Elimina Carro do array
     void eliminaCarro(Carro &);
 
     //Insere piloto num carro
-    void inserePiloto(Piloto &piloto, Carro &carro);
+    // void inserePiloto(Piloto &piloto, Carro &carro);
 
-    void iniciaCorrida();
+    int iniciaCorrida();
     void avanca(int tempo);
+    //retorna nullptr caso nenhum carro tenha ligado o sinal de emergencia
+    //retorna o carro
+    Carro const *verificaEmergencia();
     void terminaCorrida() const;
-
+    Pista &operator=(const Pista &pista);
     //inline const int getComprimento() const{return this->comprimento;};
 };
 
