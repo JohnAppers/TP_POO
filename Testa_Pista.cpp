@@ -9,17 +9,17 @@ int main()
     string s="pilotos.txt";
     simu.carregaC("carros.txt");
     simu.carregaP(s);
-    cout<< simu.lista();
+    
     simu.cria('p', "Sergio");
     simu.cria('a', 5, 100, "Auto");
     simu.cria('c', "fiat", 10, 100, 150);
-
+    cout<< simu.lista();
     simu.apaga('p', "Sergio");
     simu.apaga('a', "Auto");
     simu.apaga('c', "C");
 
-    // cout << simu.lista();
-    // cout << simu.listaCarros();
+    cout << simu.lista();
+     cout << simu.listaCarros();
     
     simu.entraCarro('A', "Sergio1");
     

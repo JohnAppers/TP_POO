@@ -141,6 +141,7 @@ void Pista::avanca(int tempo)
 
 Carro const *Pista::verificaEmergencia()
 {
+    
 }
 
 Pista &Pista::operator=(const Pista &pista)
