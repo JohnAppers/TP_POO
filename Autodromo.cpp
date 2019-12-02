@@ -28,4 +28,5 @@ Autodromo& Autodromo::operator=(const Autodromo& autodromo){
     nome=autodromo.nome;
     pista=autodromo.pista;
     garagem=autodromo.garagem;
+	return *this;
 }

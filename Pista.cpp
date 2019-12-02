@@ -138,12 +138,12 @@ void Pista::avanca(int tempo)
         }
     }
 }
-
+/*
 Carro const *Pista::verificaEmergencia()
 {
     
 }
-
+*/
 Pista &Pista::operator=(const Pista &pista)
 {
     max_carros = pista.max_carros;
@@ -152,5 +152,5 @@ Pista &Pista::operator=(const Pista &pista)
     a_correr=pista.a_correr;
     for(int i = 0; i<n_carros;i++)
         classificacao[i]=pista.classificacao[i];
-    
+	return *this;
 }

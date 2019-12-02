@@ -57,31 +57,28 @@ void print_pista(int comp, int ncarros) {
 	for (int i = 0; i < comp; i++) {
 		linha_pista << "-";
 	}
-	for (int i = 5; i <= ((ncarros * 2) + 5); i + 2) {
+	ncarros = (ncarros * 2) + 5;
+	for (int i = 5; i <= ncarros; i += 2) {
 		gotoxy(30, i);
 		cout << linha_pista.str();
 	}
 }
-void print_carros(){}
-
+void print_carros(int ncarros, int dist){
+	ncarros = (ncarros * 2) + 5;
+	for (int j = 0, i = 6; i < ncarros; i += 2) {
+		gotoxy(30 + dist, i);
+		cout << (char)(65 + j);
+		j++;
+	}
+}
 int main() {	
 	string comando, bin, delimiter = " ";
 	Simulador simu;
 	Campeonato champ = simu.getCampeonato();
 	bool valido = false;
-	int index;
+	int index, dist=0;
 	start_screen();
 	Consola::getch();
-	/*
-	menu_screen();
-	do {
-		modo = Consola::getch();
-	} while (modo != '1' && modo != '2');
-	//TAMANHO PARA CORRIDAS
-	//Consola::setScreenSize(30, 160);
-	if (modo == '1') {
-	*/
-
 	//INICIO DO MODO 1
 	simu.escolheModo(1);
 	editor();
@@ -90,13 +87,8 @@ int main() {
 		cout << "                                                  ";
 		gotoxy(0, 28);
 		getline(cin, bin);
-		gotoxy(20, 28);
 		comando = bin.substr(0, bin.find(delimiter));
 		bin.erase(0, bin.find(delimiter) + delimiter.size());
-//		while (comando.rdbuf()->in_avail() == 0) {
-//			comando >> bin;
-//			comando_str += bin;
-//		}
 		if (comando == "carregaP") {
 			comando.clear();
 			comando = bin.substr(0, bin.find(delimiter));
@@ -211,16 +203,19 @@ int main() {
 			simu.saiCarro(id, nome);
 		}
 		else if (comando == "lista") {
-		//POR COMPLETAR
+		Consola::clrscr();	
+			gotoxy(10, 3);
+			cout << simu.lista();
+			Consola::getch();
+			Consola::clrscr();
+			editor();
 		}
 		else if (comando == "campeonato") {
 			comando.clear();
 			comando = bin.substr(0, bin.find(delimiter));
 			bin.erase(0, bin.find(delimiter) + delimiter.size());
-			for (int i = 0; i < (int)champ.getAutodromo().size(); i++) {
-				cout << champ.getAutodromo()[i].getNome();
-				cout << " | " << comando;
-				if (champ.getAutodromo()[i].getNome() == comando) { 
+			for (int i = 0; i < (int)simu.getCampeonato().getAutodromo().size(); i++) {
+				if (simu.getCampeonato().getAutodromo()[i].getNome() == comando) {
 					valido = true;
 					index = i;
 				}
@@ -241,11 +236,44 @@ int main() {
 		comando.clear();
 		bin.clear();
 	} while (!valido);
+
 	//INICIO DO MODO 2
 	simu.escolheModo(2);
+	int comprimento = simu.getCampeonato().getAutodromo()[index].getPista().getComprimento();
 	do {
-		print_pista(champ.getAutodromo()[index].getPista().getComprimento(), simu.getDGV().getNumCarros());
-		Consola::getch();
-	} while (true);
+		
+		Consola::clrscr();
+		print_pista(comprimento, simu.getDGV().getNumCarros());
+		print_carros(simu.getDGV().getNumCarros(), dist);
+		gotoxy(0, 28);
+		cout << "                   ";
+		gotoxy(0, 28);
+		getline(cin, bin);
+		comando = bin.substr(0, bin.find(delimiter));
+		bin.erase(0, bin.find(delimiter) + delimiter.size());
+		if (comando == "passatempo") {
+			comando.clear();
+			comando = bin.substr(0, bin.find(delimiter));
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
+			if ((dist + stoi(comando)) <= comprimento) {
+				dist += stoi(comando);
+			}
+			else {
+				dist = comprimento;
+			}
+		}
+		else {
+			gotoxy(40, 28);
+			cout << "                       ";
+			gotoxy(40, 28);
+			cout << "Comando inválido.";
+		}
+		bin.clear();
+		comando.clear();
+	} while (dist < comprimento);
+	Consola::clrscr();
+	gotoxy(45, 14);
+	cout << "Todos os carros ganharam!";
+	Consola::getch();
 }
 
