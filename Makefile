@@ -1,7 +1,10 @@
-all: testa_pista.o simulador.o dgv.o campeonato.o autodromo.o pista.o carro.o piloto.o
-	g++ testa_pista.o simulador.o dgv.o campeonato.o autodromo.o pista.o carro.o piloto.o -o Simulador
+all: testa_pista.o simulador.o dgv.o campeonato.o autodromo.o pista.o carro.o piloto.o consola.o
+	g++ Testa_Pista.o simulador.o dgv.o campeonato.o autodromo.o pista.o carro.o piloto.o consola.o -o Simulador
 
-testa_Pista.o:
+consola.o:
+	g++ -c consola.cpp
+
+testa_pista.o:
 	g++ -c Testa_Pista.cpp
 
 simulador.o:

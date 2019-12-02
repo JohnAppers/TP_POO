@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <stdio.h>
 #include "Consola.h"
 #include "Simulador.h"
 using namespace std;
@@ -64,7 +65,7 @@ void print_pista(int comp, int ncarros) {
 void print_carros(){}
 
 int main() {	
-	
+	string comando, bin, delimiter = " ";
 	Simulador simu;
 	Campeonato champ = simu.getCampeonato();
 	bool valido = false;
@@ -82,104 +83,144 @@ int main() {
 	*/
 
 	//INICIO DO MODO 1
+	simu.escolheModo(1);
 	editor();
 	do{
-		istringstream comando;
-		string bin, comando_str;
 		gotoxy(0, 28);
 		cout << "                                                  ";
 		gotoxy(0, 28);
-		cin >> bin;
-		comando.str(bin);
-		
+		getline(cin, bin);
+		gotoxy(20, 28);
+		comando = bin.substr(0, bin.find(delimiter));
+		bin.erase(0, bin.find(delimiter) + delimiter.size());
 //		while (comando.rdbuf()->in_avail() == 0) {
 //			comando >> bin;
 //			comando_str += bin;
 //		}
-		getline(comando, comando_str, ' ');
-		cout << comando_str;
-		cout<<comando.str();
-		if (comando_str == "carregaP") {
-			comando_str = "";
-			comando >> comando_str;
-			if (simu.carregaP(comando_str) == nullptr) {
+		if (comando == "carregaP") {
+			comando.clear();
+			comando = bin.substr(0, bin.find(delimiter));
+			if (simu.carregaP(comando) == nullptr) {
 				gotoxy(50, 28);
 				cout << "Erro ao carregar piloto.";
 			}
+			else {
+				gotoxy(50, 28); 
+				cout << "Piloto carregado com sucesso.";
+			}
 		}
-		else if(comando_str == "carregaC"){
-			comando_str = "";
-			comando >> comando_str;
-			if (simu.carregaC(comando_str) == nullptr) {
+		else if(comando == "carregaC"){
+			comando.clear();
+			comando = bin.substr(0, bin.find(delimiter));
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
+			if (simu.carregaC(comando) == nullptr) {
+				gotoxy(50, 28);
+				cout << "                                    ";
 				gotoxy(50, 28);
 				cout << "Erro ao carregar carro.";
 			}
+			else {
+				gotoxy(50, 28);
+				cout << "Carro carregado com sucesso.";
+			}
 		}
-		else if (comando_str == "carregaA") {
-			comando_str = "";
-			comando >> comando_str;
-			if (simu.carregaA(comando_str) == nullptr) {
+		else if (comando == "carregaA") {
+			comando.clear();
+			comando = bin.substr(0, bin.find(delimiter));
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
+			if (simu.carregaA(comando) == nullptr) {
 				gotoxy(50, 28);
 				cout << "Erro ao carregar autodromo.";
 			}
+			else {
+				gotoxy(50, 28);
+				cout << "Autodromo carregado com sucesso.";
+			}
 		}
-		else if (comando_str == "cria") {
-			comando_str = "";
-			comando >> comando_str;
-			if (comando_str == "P" || comando_str == "p") {
-				comando_str = "";
-				comando >> comando_str;
-				simu.cria('p', comando_str);
+		else if (comando == "cria") {
+			comando.clear();
+			comando = bin.substr(0, bin.find(delimiter));
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
+			if (comando == "P" || comando == "p") {
+				comando.clear();
+				comando = bin.substr(0, bin.find(delimiter));
+				bin.erase(0, bin.find(delimiter) + delimiter.size());
+				simu.cria('p', comando);
 				gotoxy(50, 28);
 				cout << "Piloto criado com sucesso.";
 			}
-			else if (comando_str == "C" || comando_str == "c") {
+			else if (comando == "C" || comando == "c") {
 				string p1, p5;
 				float p2, p3;
 				int p4;
-				comando >> p1 >> p2 >> p3 >> p4 >> p5;
+				p1 = bin.substr(0, bin.find(delimiter));
+				bin.erase(0, bin.find(delimiter) + delimiter.size());
+				p2 = stof(bin.substr(0, bin.find(delimiter)));
+				bin.erase(0, bin.find(delimiter) + delimiter.size());
+				p3 = stof(bin.substr(0, bin.find(delimiter)));
+				bin.erase(0, bin.find(delimiter) + delimiter.size());
+				p4 = stoi(bin.substr(0, bin.find(delimiter)));
+				bin.erase(0, bin.find(delimiter) + delimiter.size());
+				p5 = bin.substr(0, bin.find(delimiter));
+				bin.erase(0, bin.find(delimiter) + delimiter.size());
 				simu.cria('c', p1, p2, p3, p4, p5);
 				gotoxy(50, 28);
 				cout << "Carro criado com sucesso.";
 			}
-			else if (comando_str == "A" || comando_str == "a") {
+			else if (comando == "A" || comando == "a") {
 				int p1, p2;
 				string p3;
-				comando >> p1 >> p2 >> p3;
+				p1 = stoi(bin.substr(0, bin.find(delimiter)));
+				bin.erase(0, bin.find(delimiter) + delimiter.size());
+				p2 = stoi(bin.substr(0, bin.find(delimiter)));
+				bin.erase(0, bin.find(delimiter) + delimiter.size());
+				p3 = bin.substr(0, bin.find(delimiter));
+				bin.erase(0, bin.find(delimiter) + delimiter.size());
 				simu.cria('a', p1, p2, p3);
 				gotoxy(50, 28);
 				cout << "Autodromo criado com sucesso.";
 			}
 		}
-		else if (comando_str == "apaga") {
+		else if (comando == "apaga") {
 			char tipo;
 			string identificador;
-			comando >> tipo;
-			comando >> identificador;
+			tipo = bin.substr(0, bin.find(delimiter)).at(0);
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
+			identificador = bin.substr(0, bin.find(delimiter));
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
 			simu.apaga(tipo, identificador);
 			gotoxy(50, 28);
 			cout << "Apagado com sucesso.";
 		}
-		else if (comando_str == "entranocarro"){
+		else if (comando == "entranocarro"){
 			char id;
 			string nome;
-			comando >> id >> nome;
+			id = bin.substr(0, bin.find(delimiter)).at(0);
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
+			nome = bin.substr(0, bin.find(delimiter));
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
 			simu.entraCarro(id, nome);
 		}
-		else if (comando_str == "saidocarro") {
+		else if (comando == "saidocarro") {
 			char id;
 			string nome;
-			comando >> id >> nome;
+			id = bin.substr(0, bin.find(delimiter)).at(0);
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
+			nome = bin.substr(0, bin.find(delimiter));
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
 			simu.saiCarro(id, nome);
 		}
-		else if (comando_str == "lista") {
+		else if (comando == "lista") {
 		//POR COMPLETAR
 		}
-		else if (comando_str == "campeonato") {
-			comando_str = "";
-			comando >> comando_str;
+		else if (comando == "campeonato") {
+			comando.clear();
+			comando = bin.substr(0, bin.find(delimiter));
+			bin.erase(0, bin.find(delimiter) + delimiter.size());
 			for (int i = 0; i < (int)champ.getAutodromo().size(); i++) {
-				if (champ.getAutodromo()[i].getNome() == comando_str) { 
+				cout << champ.getAutodromo()[i].getNome();
+				cout << " | " << comando;
+				if (champ.getAutodromo()[i].getNome() == comando) { 
 					valido = true;
 					index = i;
 				}
@@ -195,16 +236,13 @@ int main() {
 			gotoxy(50, 28);
 			cout << "                           ";
 			gotoxy(50, 28);
-			cout << comando_str;
-			cout<<comando.str();
-			
-			//cout << "Comando invalido.";
-			comando.str() = "";
-			comando_str = "";
+			cout << "Comando invalido.";
 		}
-		
+		comando.clear();
+		bin.clear();
 	} while (!valido);
 	//INICIO DO MODO 2
+	simu.escolheModo(2);
 	do {
 		print_pista(champ.getAutodromo()[index].getPista().getComprimento(), simu.getDGV().getNumCarros());
 		Consola::getch();
